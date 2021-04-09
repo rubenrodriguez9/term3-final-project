@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from 'redux'
+import kanjiReducer from './store/reducers/kanjiReducer';
+import {Provider} from 'react-redux'
+
+const kanjiStore = createStore(kanjiReducer)
+
+
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={kanjiStore} >
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
