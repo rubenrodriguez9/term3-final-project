@@ -20,12 +20,14 @@ const Register = () => {
   const submitLogin = async (e) => {
     e.preventDefault()
     
-    let response = await axios.get(`http://localhost:3001/kanji/api/users`,
+    let response = await axios.post(`http://localhost:3001/api/users/create-user`,{
+        email: emailRef.current.value,
+        password: passwordRef.current.value
 
-      {email: emailRef}
+    })
 
 
-    )
+    console.log(response);
   }
 
     return (
