@@ -6,10 +6,10 @@ const NavBar = () => {
 
         <div>
             
-            <nav class="navbar" role="navigation" aria-label="main navigation">
+            <nav class="navbar" style={{backgroundColor:'#4A4A4A'}} role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <span class="navbar-item" href="https://bulma.io">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+      <img src="https://www.flaticon.com/svg/vstatic/svg/619/619044.svg?token=exp=1618032733~hmac=e43e1f1d51179eb875a3976b3b5fd580" width="112" height="28"/>
     </span>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -19,18 +19,18 @@ const NavBar = () => {
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div id="navbarBasicExample"  class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
+      <a style={{color: "#FFFFFF"}} class="navbar-item">
         Home
       </a>
 
-      <a class="navbar-item">
+      <a style={{color: "#FFFFFF"}} class="navbar-item">
         Documentation
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
+        <a  style={{color: "#FFFFFF"}} class="navbar-link">
           More
         </a>
 
@@ -38,14 +38,14 @@ const NavBar = () => {
           <a class="navbar-item">
             About
           </a>
-          <a class="navbar-item">
+          <a style={{color: "#FFFFFF"}} class="navbar-item">
             Jobs
           </a>
-          <a class="navbar-item">
+          <a style={{color: "#FFFFFF"}} class="navbar-item">
             Contact
           </a>
           <hr class="navbar-divider"/>
-          <span class="navbar-item">
+          <span style={{color: "#FFFFFF"}} class="navbar-item">
             Report an issue
           </span>
         </div>
