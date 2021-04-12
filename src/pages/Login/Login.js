@@ -29,7 +29,9 @@ const Login = (props) => {
 
       let data = await response.data
       console.log(data);
-      window.localStorage.getItem({jwtToken: data})
+      
+
+     localStorage.setItem("jwtToken", data.jwtToken)
 
       props.history.push('/profile')
 
