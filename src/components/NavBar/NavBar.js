@@ -1,6 +1,13 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 
-const NavBar = () => {
+const NavBar = (props) => {
+
+  
+  const logout = () => {
+    window.localStorage.removeItem("jwtToken")
+    props.history.push("/")
+  }
 
     return (
 
@@ -8,9 +15,7 @@ const NavBar = () => {
             
             <nav class="navbar" style={{backgroundColor:'#4A4A4A'}} role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <span class="navbar-item" href="https://bulma.io">
-      <img src="https://www.flaticon.com/svg/vstatic/svg/619/619044.svg?token=exp=1618032733~hmac=e43e1f1d51179eb875a3976b3b5fd580" width="112" height="28"/>
-    </span>
+   
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -21,13 +26,7 @@ const NavBar = () => {
 
   <div id="navbarBasicExample"  class="navbar-menu">
     <div class="navbar-start">
-      <a style={{color: "#FFFFFF"}} class="navbar-item">
-        Home
-      </a>
-
-      <a style={{color: "#FFFFFF"}} class="navbar-item">
-        Documentation
-      </a>
+      
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a  style={{color: "#FFFFFF"}} class="navbar-link">
@@ -55,11 +54,11 @@ const NavBar = () => {
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          {/* <a class="button is-primary">
             <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
+          </a> */}
+          <a  onClick={logout} class="button is-light">
+            Log Out
           </a>
         </div>
       </div>
@@ -72,4 +71,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default withRouter(NavBar)
