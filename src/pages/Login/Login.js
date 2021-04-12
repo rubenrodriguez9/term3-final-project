@@ -1,10 +1,11 @@
 import React, {useState, useRef} from 'react'
 import test from '../../../src/test.png'
 import axios from 'axios'
+import { withRouter } from "react-router";
 
 import './Login.css'
 
-const Login = () => {
+const Login = (props) => {
   
   let styles = {
     
@@ -19,13 +20,19 @@ const Login = () => {
 
   const submitLogin = async (e) => {
     e.preventDefault()
+    console.log('sending');
     
-    let response = await axios.get(`http://localhost:3001/kanji/api/users`,
+    let response = await axios.post(`http://localhost:3001/api/users/log-in`,{ 
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      })
 
-      {email: emailRef}
+      let data = await response.data
+      console.log(data);
+      window.localStorage.getItem({jwtToken: data})
 
+      props.history.push('/profile')
 
-    )
   }
   
 
@@ -65,7 +72,7 @@ const Login = () => {
                   </div>
                   
                    <button onClick={submitLogin} class="button is-block is-dark is-large is-fullwidth">Login</button>
-                   <div class="title has-text-grey is-5">Not registered? Register <span style={{color: 'blue'}} >here</span> </div>
+                   <div class="title has-text-grey is-5">Not registered? Register <span onClick={() => props.history.push('/register')} style={{color: 'blue', cursor: 'pointer'}}>here</span> </div>
               </form>
             </div>
            

@@ -1,10 +1,11 @@
 import {useState, useRef} from 'react'
 import axios from 'axios'
 import test from '../../../src/test.png'
+import { withRouter } from "react-router";
 
 import './Register.css'
 
-const Register = () => {
+const Register = (props) => {
   
   let styles = {
     
@@ -17,17 +18,26 @@ const Register = () => {
   const emailRef = useRef('')
   const passwordRef = useRef('')
 
-  const submitLogin = async (e) => {
+  const submitRegister = async (e) => {
     e.preventDefault()
+  
     
+   try {
     let response = await axios.post(`http://localhost:3001/api/users/create-user`,{
         email: emailRef.current.value,
         password: passwordRef.current.value
-
+        
     })
+    let data = await response.data
+
+    console.log('sent');
 
 
-    console.log(response);
+    console.log(data);
+       
+   } catch (error) {
+       
+   }
   }
 
     return (
@@ -65,8 +75,8 @@ const Register = () => {
                     </div>
                   </div>
                   
-                   <button onClick={submitLogin} class="button is-block is-dark is-large is-fullwidth">Register</button>
-                   <div class="title has-text-grey is-5">Already registered? Login  <span style={{color: 'blue'}} >here</span> </div>
+                   <button onClick={submitRegister} class="button is-block is-dark is-large is-fullwidth">Register</button>
+                   <div class="title has-text-grey is-5">Already registered? Login  <span onClick={() => props.history.push('/')} style={{color: 'blue', cursor: 'pointer'}} >here</span> </div>
               </form>
             </div>
            
@@ -84,4 +94,4 @@ const Register = () => {
         </div>
     )
 }
-export default Register
+export default withRouter(Register)
