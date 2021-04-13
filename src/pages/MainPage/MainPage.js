@@ -1,23 +1,48 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import test from '../../../src/test.png'
 import DeckPanel from "./DeckPanel"
 import NavBar from './NavBar'
 import ProfileComponent from './ProfileComponent'
 import "./MainPage.css"
+import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+
+import {connect} from 'react-redux'
 
 
 const MainPage = (props) => {
 
-    // useEffect(() => {
+    useEffect(async() => {
+        let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
 
-    //     if(window.localStorage.getItem.jwtToken === undefined){
-    //         props.history.push('/')
-    //     }
-      
+        let response =  await  axios.post(`http://localhost:3001/api/users/get-decks`,{ 
+                email: decoded.email
+              })
+              
 
-    // }, [])
+        props.getDecks(response.data.data.decks)
+
+    }, [])
 
 
+    const [toggleModal, setToggleModal] = useState(false)
+    const [deckName, setDeckName] = useState('')
+
+
+    const deckNameRef = useRef('')
+
+    const handleAddDeckOnChange = () => {
+
+        
+    }
+
+    
+
+    const handleAddDeckOnSubmit = () => {
+        console.log(deckNameRef.current.value);
+        props.addDeck(deckNameRef.current.value)
+        deckNameRef.current.value = ""
+    }
 
     return (
         
@@ -34,15 +59,52 @@ const MainPage = (props) => {
             <div className="deck-panel" >
             <ProfileComponent />
             </div>
-
+                         
             <div className="add-button" >
-            <button class="button is-dark">+ Add Deck</button>
+            <button onClick={() => setToggleModal(true)} class="button is-dark">+ Add Deck</button>
+            </div>
+            
+            <div className="remove-button" >
+            <button onClick={() => setToggleModal(true)} class="button is-danger">- Remove Deck</button>
+            </div>
+{/* /////////////////////        MODAL    */}
+           {toggleModal ?  <div class="is-active modal" >
+              <div class="modal-background"></div>
+              <div class="  modal-content">
+              <div style={{backgroundColor: 'white'}} >
+                  <h2>Deck Name</h2>
+              <input class="input is-info" ref={deckNameRef} onChange={handleAddDeckOnChange} type="text" placeholder="Info input"/>
+              <button onClick={handleAddDeckOnSubmit} class="button is-primary">Submit</button> 
+              </div>
+              </div>
+                <button onClick={() => setToggleModal(!toggleModal) } class="modal-close is-large" aria-label="close" style={{backgroundColor: 'red',}}></button>
+              </div> :
+              null}
+{/* /////////////////////        MODAL    */}
             </div>
 
             
             
-        </div>
+       
     )
 }
 
-export default MainPage
+
+    const mapStateToProps = (state) => {
+        return {
+            decks: state.decks
+        }
+    }
+
+
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            getDecks: (decks) => dispatch({type: "GET_DECKS", decks: decks}),
+            addDeck: (name) => dispatch({type: "ADD_DECK", deckName: name})
+
+        }
+
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
