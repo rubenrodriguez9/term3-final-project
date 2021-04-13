@@ -5,7 +5,9 @@ import NavBar from './NavBar'
 import ProfileComponent from './ProfileComponent'
 import "./MainPage.css"
 import jwt_decode from 'jwt-decode'
+import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
+
 
 import {connect} from 'react-redux'
 
@@ -31,22 +33,40 @@ const MainPage = (props) => {
 
     const deckNameRef = useRef('')
 
-    const handleAddDeckOnChange = () => {
-
-        
-    }
+  
 
     
 
-    const handleAddDeckOnSubmit = () => {
-        console.log(deckNameRef.current.value);
-        props.addDeck(deckNameRef.current.value)
+    const handleAddDeckOnSubmit = async () => {
+       
+
+        let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
+        let newDeck = {
+            name: deckNameRef.current.value,
+            id: uuidv4(),
+            kanji: []
+        }
+
+         props.addDeck(newDeck)
+        console.log(props.decks)
+
+        
+          axios.post(`http://localhost:3001/api/users/add-deck`,{ 
+            deck: newDeck,
+            email: decoded.email
+          })
+
+          
+
+        
+      
         deckNameRef.current.value = ""
+       
     }
 
     return (
         
-        <div className="container">
+        <div className="container-main">
 
             <div className="nav-bar" >
             <NavBar />
@@ -73,7 +93,7 @@ const MainPage = (props) => {
               <div class="  modal-content">
               <div style={{backgroundColor: 'white'}} >
                   <h2>Deck Name</h2>
-              <input class="input is-info" ref={deckNameRef} onChange={handleAddDeckOnChange} type="text" placeholder="Info input"/>
+              <input class="input is-info" ref={deckNameRef} type="text" placeholder="Info input"/>
               <button onClick={handleAddDeckOnSubmit} class="button is-primary">Submit</button> 
               </div>
               </div>
@@ -101,7 +121,7 @@ const MainPage = (props) => {
     const mapDispatchToProps = (dispatch) => {
         return {
             getDecks: (decks) => dispatch({type: "GET_DECKS", decks: decks}),
-            addDeck: (name) => dispatch({type: "ADD_DECK", deckName: name})
+            addDeck: (deck) => dispatch({type: "ADD_DECK", deckName: deck})
 
         }
 

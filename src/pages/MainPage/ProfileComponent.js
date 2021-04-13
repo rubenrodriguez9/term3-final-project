@@ -4,6 +4,9 @@ import "./ProfileComponent.css"
 
 
 const ProfileComponent = (props) => {
+
+
+  
     return (
       <div  >
       <nav class="panel" >
@@ -16,7 +19,6 @@ const ProfileComponent = (props) => {
           </a> */}
 
           {props.decks.map((item) => {
-             console.log(item);
             return<a class="panel-block">
              
         <p>{item.name}</p>
