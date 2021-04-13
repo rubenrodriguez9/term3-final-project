@@ -1,5 +1,4 @@
 import React from 'react'
-import DeckPanel from '../DeckPanel/DeckPanel'
 import "./ProfileComponent.css"
 
 

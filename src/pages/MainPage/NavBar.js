@@ -13,23 +13,14 @@ const NavBar = (props) => {
 
         <div>
             <nav class="navbar" style={{backgroundColor:'#4A4A4A'}} role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-   
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
+  
   <div id="navbarBasicExample"  class="navbar-menu">
     <div class="navbar-start">
       
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a  style={{color: "#FFFFFF"}} class="navbar-link">
-          More
+         user@3.com
         </a>
 
         <div class="navbar-dropdown">
@@ -57,9 +48,7 @@ const NavBar = (props) => {
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          {/* <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a> */}
+          
           <a  onClick={logout} class="button is-light">
             Log Out
           </a>

@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import test from '../../../src/test.png'
-import DeckPanel from '../../components/DeckPanel/DeckPanel'
-import NavBar from '../../components/NavBar/NavBar'
-import ProfileComponent from '../../components/ProfileComponent/ProfileComponent'
+import DeckPanel from "./DeckPanel"
+import NavBar from './NavBar'
+import ProfileComponent from './ProfileComponent'
 import "./MainPage.css"
 
 
@@ -20,19 +20,24 @@ const MainPage = (props) => {
 
 
     return (
+        
         <div className="container">
 
-            <div className="grid-item-1" >
+            <div className="nav-bar" >
             <NavBar />
             </div>
             
-            <div className="grid-item-2" >
+            <div className="deck-stats" >
             <DeckPanel />
             </div>
 
-            {/* <div>
-            <ProfileComponent className="grid-item-3" />
-            </div> */}
+            <div className="deck-panel" >
+            <ProfileComponent />
+            </div>
+
+            <div className="add-button" >
+            <button class="button is-dark">+ Add Deck</button>
+            </div>
 
             
             

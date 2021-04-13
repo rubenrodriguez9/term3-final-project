@@ -6,7 +6,7 @@ const DeckPanel = () => {
         <div  >
             <nav class="panel" >
                <p class="panel-heading " style={{backgroundColor:'#4A4A4A', color: 'white', textAlign: 'center'}} >
-                 Profile
+                 Deck Statistics
                </p>
                <a class="panel-block">
                 
