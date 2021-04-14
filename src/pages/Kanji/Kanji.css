@@ -1,4 +1,4 @@
-.container-main {
+.kanji-container-main {
     border: 2px solid black;
     width: 100%;
     display: grid;
@@ -8,51 +8,51 @@
 
 
 
-.nav-bar{
+.kanji-nav-bar{
 
    grid-column: 1/10;
    grid-row: 1/1; 
   
 }
 
-.deck-stats{
+.kanji-deck-stats{
    grid-row: 3/4;
    grid-column: 7/9;
   
   
 }
 
-.deck-panel{
+.kanji-deck-panel{
    
   grid-row: 9/12;
   grid-column: 2/9;
 }
 
 
-.add-button{
+.kanji-add-button{
 
     grid-row: 8/9;
     grid-column: 2/3; 
 }
 
-.remove-button{
+.kanji-remove-button{
     grid-row: 8/9;
     grid-column: 8/9; 
     
 }
 
-.deck-list{
+.kanji-deck-list{
     display: grid;
    grid-template-columns: repeat(50, 1fr);
 }
 
-.deck-name{
+.kanji-deck-name{
     grid-column: 0/10;
     text-decoration: underline;
     
 }
 
-.deck-delete{
+.kanji-deck-delete{
     grid-column:49/50;
     z-index: +3;
     color: 'red';

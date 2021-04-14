@@ -19,11 +19,21 @@ const kanjiReducer = (state=initalState, action) => {
 
         case "GET_DECKS":
             
-         let newDecks = action.decks
+            let newDecks = action.decks
            return {
             ...state,
             decks: newDecks
                     }
+        case "DELETE_DECK":
+
+        let latestDecks = [...state.decks].filter((item) =>{ 
+            return item.id !== action.id
+        })
+
+        return {
+            ...state,
+            decks: latestDecks
+        }
 
     }
 

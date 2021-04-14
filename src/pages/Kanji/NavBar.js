@@ -19,20 +19,20 @@ const NavBar = (props) => {
       
 
       <div class="navbar-item has-dropdown is-hoverable">
-        <p  style={{color: "#FFFFFF"}} class="navbar-link">
+        <a  style={{color: "#FFFFFF"}} class="navbar-link">
          user@3.com
-        </p>
+        </a>
 
         <div class="navbar-dropdown">
-          <p class="navbar-item">
+          <a class="navbar-item">
             About
-          </p>
-          <p style={{color: "#FFFFFF"}} class="navbar-item">
+          </a>
+          <a style={{color: "#FFFFFF"}} class="navbar-item">
             Jobs
-          </p>
-          <p style={{color: "#FFFFFF"}} class="navbar-item">
+          </a>
+          <a style={{color: "#FFFFFF"}} class="navbar-item">
             Contact
-          </p>
+          </a>
           <hr class="navbar-divider"/>
           <span style={{color: "#FFFFFF"}} class="navbar-item">
             Report an issue
@@ -49,9 +49,9 @@ const NavBar = (props) => {
       <div class="navbar-item">
         <div class="buttons">
           
-          <p  onClick={logout} class="button is-light">
+          <a  onClick={logout} class="button is-light">
             Log Out
-          </p>
+          </a>
         </div>
       </div>
     </div>

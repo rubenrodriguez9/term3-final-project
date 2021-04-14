@@ -30,13 +30,7 @@ const MainPage = (props) => {
     const [toggleModal, setToggleModal] = useState(false)
     const [deckName, setDeckName] = useState('')
 
-
     const deckNameRef = useRef('')
-
-  
-
-    
-
     const handleAddDeckOnSubmit = async () => {
        
 
@@ -49,19 +43,11 @@ const MainPage = (props) => {
 
          props.addDeck(newDeck)
         console.log(props.decks)
-
-        
           axios.post(`http://localhost:3001/api/users/add-deck`,{ 
             deck: newDeck,
             email: decoded.email
           })
-
-          
-
-        
-      
         deckNameRef.current.value = ""
-       
     }
 
     return (
@@ -84,10 +70,7 @@ const MainPage = (props) => {
             <button onClick={() => setToggleModal(true)} class="button is-dark">+ Add Deck</button>
             </div>
             
-            <div className="remove-button" >
-            <button onClick={() => setToggleModal(true)} class="button is-danger">- Remove Deck</button>
-            </div>
-{/* /////////////////////        MODAL    */}
+
            {toggleModal ?  <div class="is-active modal" >
               <div class="modal-background"></div>
               <div class="  modal-content">
@@ -100,7 +83,6 @@ const MainPage = (props) => {
                 <button onClick={() => setToggleModal(!toggleModal) } class="modal-close is-large" aria-label="close" style={{backgroundColor: 'red',}}></button>
               </div> :
               null}
-{/* /////////////////////        MODAL    */}
             </div>
 
             
