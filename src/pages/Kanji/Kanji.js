@@ -47,7 +47,7 @@ const Kanji = (props) => {
         try {
             let response = await axios.get(`https://kanjialive-api.p.rapidapi.com/api/public/kanji/${kanji}`,{
             "headers": {
-              "x-rapidapi-key": "49e55a8007mshe7f1dd2f9efaf5dp1e5f32jsnfb100af21a58",
+              "x-rapidapi-key": process.env.REACT_APP_KANJIAPIKEY,
               "x-rapidapi-host": "kanjialive-api.p.rapidapi.com"
             }})
             console.log(response);
