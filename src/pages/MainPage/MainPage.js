@@ -7,14 +7,13 @@ import "./MainPage.css"
 import jwt_decode from 'jwt-decode'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
-
-
 import {connect} from 'react-redux'
 
 
 const MainPage = (props) => {
 
     useEffect(async() => {
+        console.log(props.decks);
         let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
 
         let response =  await  axios.post(`http://localhost:3001/api/users/get-decks`,{ 
@@ -41,7 +40,10 @@ const MainPage = (props) => {
             kanji: []
         }
 
-         props.addDeck(newDeck)
+        console.log('sending to front ');
+        props.addDeck(newDeck)
+        console.log('sent to front ');
+
         console.log(props.decks)
           axios.post(`http://localhost:3001/api/users/add-deck`,{ 
             deck: newDeck,

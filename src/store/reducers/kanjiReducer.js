@@ -1,8 +1,7 @@
 
-import { v4 as uuidv4 } from 'uuid'
-
 const initalState = {
-    decks : []
+    decks : [],
+    tempDeck: {}
 }
 
 const kanjiReducer = (state=initalState, action) => {
@@ -24,6 +23,7 @@ const kanjiReducer = (state=initalState, action) => {
             ...state,
             decks: newDecks
                     }
+    
         case "DELETE_DECK":
 
         let latestDecks = [...state.decks].filter((item) =>{ 
@@ -34,6 +34,31 @@ const kanjiReducer = (state=initalState, action) => {
             ...state,
             decks: latestDecks
         }
+        // 
+        case "TEMP_DECK":
+
+        console.log(action.deck);
+
+
+        return {
+            ...state,
+            tempDeck: action.deck
+        }
+
+
+        case "ADD_KANJI_TO_DECK":
+         
+            console.log('beginning');
+
+            let newTempDeck = {...state.tempDeck}
+            newTempDeck.kanji.push(action.kanji)
+
+
+        
+            return {
+                ...state,
+                tempDeck:  newTempDeck
+            }
 
     }
 

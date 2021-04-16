@@ -3,16 +3,19 @@ import { withRouter } from "react-router"
 import NavBar from '../MainPage/NavBar'
 import jwt_decode from 'jwt-decode'
 import DeckPanel from './DeckPanel'
-import { useLocation } from "react-router-dom";
 import axios from 'axios'
 import "./Kanji.css"
+import {connect} from 'react-redux'
+import Card from './Card'
+
+
 
 const Kanji = (props) => {
 
-    const location = useLocation();
+   
     useEffect(() => {
         let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
-        console.log(location.state.detail); 
+        console.log(props);
     }, [])
 
     const [toggleModal, setToggleModal] = useState(false)
@@ -43,18 +46,37 @@ const Kanji = (props) => {
     }
 
     const addKanji = async (kanji) => {
-
+        
+let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
         try {
             let response = await axios.get(`https://kanjialive-api.p.rapidapi.com/api/public/kanji/${kanji}`,{
             "headers": {
               "x-rapidapi-key": process.env.REACT_APP_KANJIAPIKEY,
               "x-rapidapi-host": "kanjialive-api.p.rapidapi.com"
             }})
-            console.log(response);
-            // if(response.data.length === 0){
-            //   setErrorToggle(true)
-            // }
-            // setFlashCards(response.data)
+      
+            console.log(props);
+           
+            axios.post(`http://localhost:3001/api/users/add-kanji`,{ 
+                email: decoded.email,
+                deck: props.tempDeck,
+                  kanji: response.data
+         
+             })
+
+           
+
+              props.addKanjiToDeck(response.data)
+             
+  
+
+      
+
+          
+
+            
+            
+
           } catch (error) {
             
           };
@@ -62,7 +84,7 @@ const Kanji = (props) => {
     return (
         <div className="kanji-container-main">
 
-            <div className="add-button" >
+            <div className="kanji-add-button" >
             <button  onClick={() => setToggleModal(!toggleModal)} class="button is-dark">+ Add Kanji</button>
             </div>
 
@@ -72,6 +94,10 @@ const Kanji = (props) => {
 
             <div className="kanji-deck-stats" >
             <DeckPanel />
+            </div>
+            
+            <div className="card" >
+              <Card/>
             </div>
 
             
@@ -103,4 +129,20 @@ const Kanji = (props) => {
     )
 }
 
-export default withRouter(Kanji)
+
+const mapStateToProps = (state) => {
+    return {
+        tempDeck: state.tempDeck
+    }
+}
+
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+       addKanjiToDeck : (kanji) => dispatch({type: "ADD_KANJI_TO_DECK", kanji: kanji}) 
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Kanji))

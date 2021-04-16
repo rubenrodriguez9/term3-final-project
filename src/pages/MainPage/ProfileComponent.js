@@ -26,12 +26,10 @@ const ProfileComponent = (props) => {
   }
 
  const handleOnCLickStudyDeck = (item) => {
-   
-   history.push({
-    pathname: '/study',
-    search: '?query=abc',
-    state: { detail: item }
-  })
+  
+  props.addToTempDeck(item)
+
+  props.history.push('/study')
  } 
  const [toggleModal, setToggleModal] = useState(false)
   
@@ -72,7 +70,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
       return {
-        deleteDeck: (id) => dispatch({type: "DELETE_DECK", id: id})
+        deleteDeck: (id) => dispatch({type: "DELETE_DECK", id: id}),
+        addToTempDeck: (deck) => dispatch({type:"TEMP_DECK", deck:deck})
       }
 
 
