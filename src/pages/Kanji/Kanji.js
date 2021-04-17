@@ -10,7 +10,7 @@ import Card from './Card'
 
 
 
-const Kanji = (props) => {
+const Kanji = (props, ) => {
 
    
     useEffect(() => {
@@ -22,6 +22,16 @@ const Kanji = (props) => {
     const [search, setSearch] = useState('')
     const [errorToggle, setErrorToggle] = useState(false)
     const [flashCards, setFlashCards] = useState([])
+
+
+    let previousButton = () => {
+      console.log('from parent Component');
+  }
+
+  
+
+
+  
 
     const handleKanjiAPI = async () => {      
 
@@ -97,8 +107,18 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
             </div>
             
             <div className="card" >
-              <Card/>
+              <Card  />
             </div>
+
+            
+            
+
+
+            
+
+            
+
+           
 
             
             {toggleModal ?  <div class="is-active modal" >
