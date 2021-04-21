@@ -1,7 +1,8 @@
 
 const initalState = {
     decks : [],
-    tempDeck: {}
+    tempDeck: {},
+    
 }
 
 const kanjiReducer = (state=initalState, action) => {
@@ -59,7 +60,25 @@ const kanjiReducer = (state=initalState, action) => {
                 ...state,
                 tempDeck:  newTempDeck
             }
+       
+        case "DELETE_KANJI_FROM_DECK":
 
+            console.log(action.kanji);
+            let newKanji = state.tempDeck.kanji.filter((item) => {
+               return item.kanji.character !== action.kanji
+
+            })
+
+            console.log(state.tempDeck.kanji);
+            console.log(newKanji);
+            
+
+            return {
+                ...state,
+                tempDeck:  {...state.tempDeck,
+                                kanji: newKanji
+                                }
+            }
     }
 
     return state

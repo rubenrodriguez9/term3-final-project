@@ -10,7 +10,7 @@ import Card from './Card'
 
 
 
-const Kanji = (props, ) => {
+const Kanji = (props) => {
 
    
     useEffect(() => {
@@ -22,13 +22,9 @@ const Kanji = (props, ) => {
     const [search, setSearch] = useState('')
     const [errorToggle, setErrorToggle] = useState(false)
     const [flashCards, setFlashCards] = useState([])
+    const [toDeleteKanji, setToDeleteKanji] = useState('null')
+    const [nextKanji, setNextKanji] = useState(0)
 
-
-    let previousButton = () => {
-      console.log('from parent Component');
-  }
-
-  
 
 
   
@@ -78,24 +74,27 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
 
               props.addKanjiToDeck(response.data)
              
-  
-
-      
-
-          
-
-            
-            
-
           } catch (error) {
             
           };
+    }
+
+    const deleteKanji = async () => {
+      console.log(props.tempDeck.kanji[nextKanji].kanji.character)
+
+      props.deleteKanjiFromDeck(props.tempDeck.kanji[nextKanji].kanji.character)
+      setNextKanji(0)
+      
     }
     return (
         <div className="kanji-container-main">
 
             <div className="kanji-add-button" >
-            <button  onClick={() => setToggleModal(!toggleModal)} class="button is-dark">+ Add Kanji</button>
+            <button  onClick={() => setToggleModal(!toggleModal)} class="button is-dark">+ Add</button>
+            </div>
+
+            <div className="kanji-delete-button" >
+            <button onClick={deleteKanji} class="button is-dark">- Delete</button>
             </div>
 
             <div className="kanji-nav-bar" >
@@ -107,7 +106,7 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
             </div>
             
             <div className="card" >
-              <Card  />
+              <Card  nextKanji={nextKanji} setNextKanji={setNextKanji}/>
             </div>
 
             
@@ -160,7 +159,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       addKanjiToDeck : (kanji) => dispatch({type: "ADD_KANJI_TO_DECK", kanji: kanji}) 
+      addKanjiToDeck : (kanji) => dispatch({type: "ADD_KANJI_TO_DECK", kanji: kanji}),
+      deleteKanjiFromDeck: (kanji) => dispatch({type: "DELETE_KANJI_FROM_DECK", kanji: kanji})
+
     }
 
 }

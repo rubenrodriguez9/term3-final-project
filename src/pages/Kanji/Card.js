@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import ReactPlayer from 'react-player'
 import "./Kanji.css"
@@ -7,53 +7,72 @@ import "./Kanji.css"
 
 const Card = (props) => {
 
+    useEffect(() => {
+
+        console.log(props.tempDeck.kanji[props.nextKanji]);
+        
+    }, [])
+
+
+   
+    
+    
 
     
-    const [nextKanji, setNextKanji] = useState(0)
+    let nextButton = async () => {
 
-    let nextButton = () => {
+console.log('hello');
+console.log(props.tempDeck.kanji);
       
-      if(props.tempDeck.kanji[nextKanji+1] === undefined){
+    if(props.tempDeck.kanji[props.nextKanji+1] === undefined){
           return    
-      } else setNextKanji(nextKanji+1)
+      } else  props.setNextKanji(props.nextKanji+1)
 
+    
 
      }
 
     const previousButton = () => {
-        if(props.tempDeck.kanji[nextKanji-1] === undefined){
+        if(props.tempDeck.kanji[props.nextKanji-1] === undefined){
             return    
-        } else setNextKanji(nextKanji-1)
+        } else {props.setNextKanji(props.nextKanji-1)
+            }
 
     }
 
+    
     return (
        
             <div>
 
                 <div>
-                <div class="flip-card"> 
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src={props.tempDeck.kanji[nextKanji].radical.image} className='kanji-img' />
+
+                    {props.tempDeck.kanji[props.nextKanji] ?
+                    <div class="flip-card"> 
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src={props.tempDeck.kanji[props.nextKanji].kanji.strokes.images[props.tempDeck.kanji[props.nextKanji].kanji.strokes.images.length -1]} className='kanji-img' />
+                        </div>
+                        <div class="flip-card-back"> 
+                            <h1>{props.tempDeck.kanji[props.nextKanji].radical.meaning.english}</h1> 
+                            <p> Kunyomoi:  {props.tempDeck.kanji[props.nextKanji].kanji.kunyomi.hiragana} </p> 
+                            <p> Onyomi:  {props.tempDeck.kanji[props.nextKanji].kanji.onyomi.katakana } </p>
+                        </div>
                     </div>
-                    <div class="flip-card-back"> {/* grid needed here */}           {/* grid needed here */}            {/* grid needed here */}
-                        <h1>{props.tempDeck.kanji[nextKanji].radical.meaning.english}</h1> 
-                        <p> Kunyomoi:  {props.tempDeck.kanji[nextKanji].kanji.kunyomi.hiragana} </p> 
-                        <p> Onyomi:  {props.tempDeck.kanji[nextKanji].kanji.onyomi.katakana } </p>
-                    </div>
-                </div>
-                    </div>
+                        </div> 
+                
+                : null}
+                
 
                 <div className="kanji-align"  >{/* grid needed here */}            {/* grid needed here */}            {/* grid needed here */}
                     <div>
-                        <button onClick={nextButton} class="button is-dark" >Next</button>
+                        <button onClick={previousButton} class="button is-dark" >Previous</button>
                     </div>
                     <div>
                         <button  class="button is-dark">Favorite</button>
                     </div>
                     <div>
-                        <button onClick={previousButton} class="button is-dark">Previous</button>
+                        <button onClick={nextButton} class="button is-dark">Next</button>
                     </div>
                 </div>
             </div>
@@ -65,17 +84,10 @@ const Card = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        tempDeck: state.tempDeck
+        tempDeck: state.tempDeck,
+        
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
 
-    return {
-
-    }
-
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card)
+export default connect(mapStateToProps)(Card)
