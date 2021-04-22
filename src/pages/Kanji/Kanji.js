@@ -11,7 +11,7 @@ import Card from './Card'
 
 
 const Kanji = (props) => {
-
+  
    
     useEffect(() => {
         let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
@@ -80,9 +80,37 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
     }
 
     const deleteKanji = async () => {
+      console.log(props.tempDeck);
       console.log(props.tempDeck.kanji[nextKanji].kanji.character)
+      
+      let kanji = props.tempDeck.kanji.filter((item, i) => {
+        return i !== nextKanji
+      })
+
+      console.log(kanji);
 
       props.deleteKanjiFromDeck(props.tempDeck.kanji[nextKanji].kanji.character)
+
+     try {
+      let decoded = jwt_decode(window.localStorage.getItem("jwtToken")) 
+
+      
+      console.log(decoded);
+
+      axios.post(`http://localhost:3001/api/users/delete-kanji`,{ 
+                email: decoded.email,
+                id: props.tempDeck.id,
+                kanji: kanji
+                
+
+                 
+              })
+       
+     } catch (error) {
+       
+     }
+
+
       setNextKanji(0)
       
     }
