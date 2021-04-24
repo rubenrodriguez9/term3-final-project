@@ -24,10 +24,15 @@ const Kanji = (props) => {
     const [flashCards, setFlashCards] = useState([])
     const [toDeleteKanji, setToDeleteKanji] = useState('null')
     const [nextKanji, setNextKanji] = useState(0)
-
+    const [successNotification, setSuccessNotification] = useState(false)
+    
 
 
   
+    function handleCloseModal() {
+      setToggleModal(!toggleModal)
+      setSuccessNotification(false)
+    }
 
     const handleKanjiAPI = async () => {      
 
@@ -45,9 +50,12 @@ const Kanji = (props) => {
             setErrorToggle(true)
           }
           setFlashCards(response.data)
+          
         } catch (error) {
           
         }
+
+
        
     }
 
@@ -73,6 +81,7 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
            
 
               props.addKanjiToDeck(response.data)
+              setSuccessNotification(true)
              
           } catch (error) {
             
@@ -159,12 +168,13 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
           return <p onClick={() => addKanji(item.kanji.character)} style={{fontSize: "50px"}} >{item.kanji.character}</p>
         })}
       </div>
+            {successNotification ? <div style={{color: 'green'}} > Kanji Added!</div>: null}
               <input class="input" value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Text input"/>
 
               <button onClick={handleKanjiAPI} class="button is-primary">Submit</button> 
               </div>
               </div>
-                <button  class="modal-close is-large" aria-label="close"  onClick={() => setToggleModal(!toggleModal)} style={{backgroundColor: 'red',}}></button>
+                <button  class="modal-close is-large" aria-label="close"  onClick={handleCloseModal} style={{backgroundColor: 'red',}}></button>
                 
               </div> :
               null}
