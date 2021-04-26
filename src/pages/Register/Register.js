@@ -19,6 +19,7 @@ const Register = (props) => {
   const passwordRef = useRef('')
   const [emailToggle, setEmailToggle] = useState(false)
   const [passwordCheck, setPasswordCheck] = useState(false)
+  const [registerError, setRegisterError] = useState(false)
 
 
   const submitRegister = async (e) => {
@@ -45,10 +46,15 @@ const Register = (props) => {
     console.log('sent');
 
 
-    console.log(data);
+    alert('User Created!')
+    props.history.push('/')
        
    } catch (error) {
-       
+
+    console.log(error);
+    if(error.response.status === 409){
+      setRegisterError(true)
+    }
    }
   }
 
@@ -101,7 +107,8 @@ const Register = (props) => {
                     <div class="control">    
                     {emailToggle ? <div style={{color: 'red'}}>Please enter a valid email.</div>: null}
                     {passwordCheck ? <div style={{color: 'red'}}>Password must contain one lowercase , uppercase, number and symbol.</div> : null }
-                      <input ref={emailRef} onChange={() => emailCheck()} class="input is-large" type="email" placeholder="Email"/>  
+                    {registerError ? <div style={{color: 'red'}}>Email Already Taken!</div> : null }
+                      <input ref={emailRef} onChange={() => emailCheck() & setRegisterError(false)} class="input is-large" type="email" placeholder="Email"/>  
                     </div>
                   </div>
                   <div class="field"> 
