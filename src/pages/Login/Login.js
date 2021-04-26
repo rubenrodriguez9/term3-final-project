@@ -18,25 +18,36 @@ const Login = (props) => {
   const emailRef = useRef('')
   const passwordRef = useRef('')
 
+  const [signInError, setSignInError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+
   const submitLogin = async (e) => {
     e.preventDefault()
     console.log('sending');
     
+   try {
+
     let response = await axios.post(`http://localhost:3001/api/users/log-in`,{ 
-        email: emailRef.current.value,
-        password: passwordRef.current.value
-      })
+      email: emailRef.current.value,
+      password: passwordRef.current.value
+    })
 
-      let data = await response.data
-      console.log(data);
-      
+    let data = await response.data
+    console.log(data);
+    
 
-     localStorage.setItem("jwtToken", data.jwtToken)
+   localStorage.setItem("jwtToken", data.jwtToken)
 
-      props.history.push('/profile')
-
+    props.history.push('/profile')
+     
+   } catch (error) {
+     if(error.response.status === 404){
+       setSignInError(true)
+     } else if(error.response.status === 401){
+      setPasswordError(true)
+    } 
   }
-  
+}
 
     return (
         <div>
@@ -64,7 +75,9 @@ const Login = (props) => {
                   </div> 
                   <div class="field"> 
                     <div class="control">    
-                      <input ref={emailRef} class="input is-large" type="email" placeholder="Email"/>  
+                    {signInError? <div style={{color: 'red'}}> User Not Found!</div> : null}
+                    {passwordError? <div style={{color: 'red'}}> Incorrect Password!</div> : null}
+                      <input ref={emailRef} onChange={() => setSignInError(false) & setPasswordError(false)} class="input is-large" type="email" placeholder="Email"/>  
                     </div>
                   </div>
                   <div class="field"> 
