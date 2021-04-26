@@ -139,7 +139,7 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
             </div>
 
             <div className="kanji-deck-stats" >
-            <DeckPanel />
+            <DeckPanel currentDeck={props.tempDeck}/>
             </div>
             
             <div className="card" >

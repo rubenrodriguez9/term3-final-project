@@ -2,26 +2,31 @@ import React from 'react'
 import "./DeckPanel.css"
 
 
-const DeckPanel = () => {
+const DeckPanel = (props) => {
+  console.log(props.currentDeck.kanji);
     return (
         <div  >
-            <nav class="panel" >
-               <p class="panel-heading " style={{backgroundColor:'#4A4A4A', color: 'white', textAlign: 'center'}} >
+            <nav class="panel"  >
+               <p class="panel-heading is-flex" style={{backgroundColor:'#4A4A4A', color: 'white', textAlign: 'center'}} >
                  Deck Statistics
                </p>
-               <p class="panel-block">
+               <p class="panel-block container" >
                 
-                 <div> Total Decks </div> 
+                 <div class='column is-5 ' > Total Kanji</div> 
+                 <div class='column is-6' ></div>
+                 <div class='column is-3 ' > {props.currentDeck.kanji.length}  </div> 
                </p>
                <p class="panel-block">
-                 Favorite Decks
+               <div class='column is-5' > Learned  </div> 
+                 <div class='column is-6' ></div>
+                 <div class='column is-3 ' > {props.currentDeck.kanji.length}  </div>
                 </p>
                 <p class="panel-block">
-                 Total Kanji
+                <div class='column is-5 ' > Favorite  </div> 
+                 <div class='column is-6' ></div>
+                 <div class='column is-3 ' > {props.currentDeck.kanji.length}  </div>
                 </p>
-                <p class="panel-block">
-                  Favorite Kanji
-               </p>
+               
             </nav>
         </div>
     )

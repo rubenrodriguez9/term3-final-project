@@ -1,5 +1,5 @@
 .container-main {
-    border: 2px solid black;
+   
     width: 100%;
     display: grid;
     grid-template-columns: repeat(9, 1fr) ;

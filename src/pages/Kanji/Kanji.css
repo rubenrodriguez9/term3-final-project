@@ -1,5 +1,5 @@
 .kanji-container-main {
-    border: 2px solid black;
+   
     width: 100%;
     display: grid;
     grid-template-columns: repeat(20, 1fr) ;
@@ -17,7 +17,7 @@
 
 .kanji-deck-stats{
    grid-row: 3/4;
-   grid-column: 13/19;
+   grid-column: 13/17;
   
   
 }

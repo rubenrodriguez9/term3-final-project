@@ -2,7 +2,7 @@ import {useState, useRef} from 'react'
 import axios from 'axios'
 import test from '../../../src/test.png'
 import { withRouter } from "react-router";
-
+import validator from 'validator'
 import './Register.css'
 
 const Register = (props) => {
@@ -17,9 +17,21 @@ const Register = (props) => {
 
   const emailRef = useRef('')
   const passwordRef = useRef('')
+  const [emailToggle, setEmailToggle] = useState(false)
+  const [passwordCheck, setPasswordCheck] = useState(false)
+
 
   const submitRegister = async (e) => {
     e.preventDefault()
+
+    if(emailToggle){
+      console.log('bad');
+      return
+    } else if(validator.isStrongPassword(passwordRef.current.value) === false){
+      setPasswordCheck(true)
+      
+      return
+    }
   
     
    try {
@@ -40,6 +52,27 @@ const Register = (props) => {
    }
   }
 
+  const emailCheck = () => {
+    if(validator.isEmail(emailRef.current.value) === false){
+      setEmailToggle(true)
+
+      console.log(validator.isEmail(emailRef.current.value));
+      console.log(emailRef.current.value);
+    } else {
+      setEmailToggle(false)
+    }
+   
+    
+  }
+
+  const handlePasswordCheck = () => {
+    setPasswordCheck(false)
+    console.log(validator.isStrongPassword(passwordRef.current.value));
+
+
+  }
+
+  
     return (
         <div>
           
@@ -66,12 +99,14 @@ const Register = (props) => {
                   </div> 
                   <div class="field"> 
                     <div class="control">    
-                      <input ref={emailRef} class="input is-large" type="email" placeholder="Email"/>  
+                    {emailToggle ? <div style={{color: 'red'}}>Please enter a valid email.</div>: null}
+                    {passwordCheck ? <div style={{color: 'red'}}>Password must contain one lowercase , uppercase, number and symbol.</div> : null }
+                      <input ref={emailRef} onChange={() => emailCheck()} class="input is-large" type="email" placeholder="Email"/>  
                     </div>
                   </div>
                   <div class="field"> 
                     <div class="control">    
-                      <input ref={passwordRef} class="input is-large" type="password" placeholder="Password"/>  
+                      <input ref={passwordRef} class="input is-large" type="password" onChange={handlePasswordCheck} placeholder="Password"/>  
                     </div>
                   </div>
                   
