@@ -56,6 +56,24 @@ const MainPage = (props) => {
         
         <div className="container-main">
 
+           <div className="bread-crumb">
+           <nav  class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                  <li onClick={() => props.history.push('/grade-1')} ><p>Grade-1</p></li>
+                  <li><a href="#">Grade-2</a></li>
+                  <li><a href="#">Grade-3</a></li>
+                  <li><a href="#">Grade-4</a></li>
+                  <li><a href="#">Grade-5</a></li>
+                  <li><a href="#">Grade-6</a></li>
+                  <li><a href="#">Grade-7</a></li>
+                  <li><a href="#">Grade-8</a></li>
+                </ul>
+            </nav>
+           </div>
+            
+            {/* <button onClick={() => props.history.push('/grade-1')} class="button is-dark">Submit</button> */}
+            
+
             <div className="nav-bar" >
             <NavBar />
             </div>
