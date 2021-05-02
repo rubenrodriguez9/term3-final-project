@@ -71,7 +71,7 @@ let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
       
             console.log(props);
            
-            axios.post(`http://localhost:3001/api/users/add-kanji`,{ 
+            axios.post(process.env.REACT_APP_ADDKANJI,{ 
                 email: decoded.email,
                 deck: props.tempDeck,
                   kanji: response.data

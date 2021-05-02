@@ -16,7 +16,7 @@ const MainPage = (props) => {
         console.log(props.decks);
         let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
 
-        let response =  await  axios.post(`http://localhost:3001/api/users/get-decks`,{ 
+        let response =  await  axios.post(process.env.REACT_APP_GETDECKS,{ 
                 email: decoded.email
               })
               
@@ -45,7 +45,7 @@ const MainPage = (props) => {
         console.log('sent to front ');
 
         console.log(props.decks)
-          axios.post(`http://localhost:3001/api/users/add-deck`,{ 
+          axios.post(process.env.REACT_APP_ADDDECK,{ 
             deck: newDeck,
             email: decoded.email
           })

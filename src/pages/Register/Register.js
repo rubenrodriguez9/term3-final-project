@@ -36,7 +36,7 @@ const Register = (props) => {
   
     
    try {
-    let response = await axios.post(`http://localhost:3001/api/users/create-user`,{
+    let response = await axios.post(process.env.REACT_APP_CREATEUSER,{
         email: emailRef.current.value,
         password: passwordRef.current.value
         

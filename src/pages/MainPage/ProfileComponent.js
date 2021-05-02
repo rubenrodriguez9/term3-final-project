@@ -17,7 +17,7 @@ const ProfileComponent = (props) => {
 
       let decoded = jwt_decode(window.localStorage.getItem("jwtToken"))
         console.log(id);
-      axios.post(`http://localhost:3001/api/users/delete-deck`,{ 
+      axios.post(process.env.REACT_APP_DELETEDECK,{ 
         email: decoded.email,
         id: id
       })
