@@ -27,7 +27,7 @@ const Login = (props) => {
     
    try {
 
-    let response = await axios.post(`http://localhost:3001/api/users/log-in`,{ 
+    let response = await axios.post(process.env.REACT_APP_LOGIN,{ 
       email: emailRef.current.value,
       password: passwordRef.current.value
     })
