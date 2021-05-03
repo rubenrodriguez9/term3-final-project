@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import "./Grade1.css"
 
 const Grade1 = () => {
 
@@ -9,6 +10,7 @@ const Grade1 = () => {
   }, [])
 
   const [kanji, setKanji] = useState([])
+  const [apiKanji, setApiKanji] = useState('')
 
 
   const getKanji = async () => {
@@ -17,12 +19,45 @@ const Grade1 = () => {
     setKanji(success.data)
   }
 
+  const getKanjiMeaning = async (item, i) => {
+    console.log(i);
+    let success = await axios.get(`https://kanjiapi.dev/v1/kanji/${item}`)
+    setApiKanji(success.data.meanings[0])
+
+
+  }
+
 
     return (
-        <div>
-            <button onClick={() => console.log(kanji)} >submit</button>
+        <div className="grid-grade-container" >
+
+            {kanji.map((item) => {
+             return <div onMouseEnter={() => getKanjiMeaning(item)} class="flip-card  " > 
+                    <div class="flip-card-inner">
+                        <div  class="flip-card-front">
+                            {/* <img src={} className='kanji-img' /> */}
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                           <h1 style={{fontSize: "50px"}} >{item}</h1> 
+                        </div>
+                        <div  class="flip-card-back"> 
+                        <br></br>
+                            <br></br>
+                            <br></br>
+                            <h1 style={{fontSize: "40px"}}>{apiKanji}</h1> 
+                            {/* <p> Kunyomoi:  {} </p>  */}
+                            {/* <p> Onyomi:  {} </p> */}
+                        </div>
+                    </div>
+                        </div> 
+            })}
+            
         </div>
     )
 }
+
+
 
 export default Grade1

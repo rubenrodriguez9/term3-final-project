@@ -59,14 +59,14 @@ const MainPage = (props) => {
            <div className="bread-crumb">
            <nav  class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                  <li onClick={() => props.history.push('/grade-1')} ><p>Grade-1</p></li>
-                  <li><a href="#">Grade-2</a></li>
-                  <li><a href="#">Grade-3</a></li>
-                  <li><a href="#">Grade-4</a></li>
-                  <li><a href="#">Grade-5</a></li>
-                  <li><a href="#">Grade-6</a></li>
-                  <li><a href="#">Grade-7</a></li>
-                  <li><a href="#">Grade-8</a></li>
+                  <li onClick={() => props.history.push('/grade-1')} ><p> Grade-1 </p></li>
+                  <li onClick={() => props.history.push('/grade-2')} ><p> Grade-2 </p></li>
+                  <li onClick={() => props.history.push('/grade-3')} ><p> Grade-3 </p></li>
+                  <li onClick={() => props.history.push('/grade-4')} ><p> Grade-4 </p></li>
+                  <li onClick={() => props.history.push('/grade-5')} ><p> Grade-5 </p></li>
+                  <li onClick={() => props.history.push('/grade-6')} ><p> Grade-6 </p></li>
+                  <li onClick={() => props.history.push('/grade-7')} ><p> Grade-7 </p></li>
+                  <li onClick={() => props.history.push('/grade-8')} ><p> Grade-8 </p></li>
                 </ul>
             </nav>
            </div>

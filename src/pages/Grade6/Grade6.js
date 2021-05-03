@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
-const Grade8 = () => {
+const Grade6 = () => {
 
   useEffect(() => {
       getKanji()
@@ -14,7 +14,7 @@ const Grade8 = () => {
 
   const getKanji = async () => {
        
-    let success = await axios.get(`https://kanjiapi.dev/v1/kanji/grade-8`)
+    let success = await axios.get(`https://kanjiapi.dev/v1/kanji/grade-6`)
     setKanji(success.data)
   }
 
@@ -57,4 +57,5 @@ const Grade8 = () => {
     )
 }
 
-export default Grade8
+
+export default Grade6
